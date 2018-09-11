@@ -20,14 +20,13 @@
 .avatar {
   width: 60px;
   margin-top: 5px;
-  border-radius: 15px;
   height: 55px;
   margin-left: 10px;
+  border-radius: 5px;
 }
 
 .userName {
   position: absolute;
-  top: 0;
   margin-left: 10px;
 }
 
@@ -57,4 +56,6 @@
   background-color: #e8e8e8;
   line-height: 45px;
   position: relative;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
