@@ -57,13 +57,19 @@ const data = [
 function createTweetElement(db){
   const $tweet = $("<article>").addClass("tweet");
   const header = `<header class="tweet-header">
-                    <img class="avatar" src="${db.user.avatars.small}">
-                    <strong class="userName">${db.user.name}</strong>
-                    <small class="user">${db.user.handle}</small>
+                    <img class="avatar" src="${escape(db.user.avatars.small)}">
+                    <strong class="userName">${escape(db.user.name)}</strong>
+                    <small class="user">${escape(db.user.handle)}</small>
                   </header>`
-  const body = `<p class="tweet-body">${db.content.text}</p>`;
+  const body = `<p class="tweet-body">${escape(db.content.text)}</p>`;
   const timeCreated = new Date(db.created_at).toLocaleTimeString();
-  const footer = `<footer class="timeStamp">${timeCreated}</footer>`;
+  const footer = `<footer class="timeStamp">${escape(timeCreated)}
+                    <p class="icons">
+                      <i class="fas fa-flag"></i>
+                      <i class="fas fa-retweet"></i>
+                      <i class="fas fa-heart"></i>
+                    </p>
+                  </footer>`;
 
   $tweet.append(header);
   $tweet.append(body);
@@ -87,8 +93,18 @@ function tweetSubmit() {
       } else if (!$(".text-box").val().length){
         alert("Please enter tweet!");
       } else {
-        $.ajax("/tweets", { data: $(this).serialize(), method: "POST" })
-
+        $.ajax(
+          "/tweets",
+          {
+            data: $(this).serialize(),
+            method: "POST",
+            success: data => {
+              // fill me in
+               loadTweets();
+              // check for success status code
+              // else error in submitting data
+            }
+          });
       }
       });
   };
@@ -98,6 +114,12 @@ function loadTweets() {
     .then(function (tweets) {
       renderTweet(tweets);
     });
+}
+
+function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
 }
 
 $(document).ready(function() {

@@ -61,3 +61,15 @@
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
+
+.tweet:hover .icons {
+  color: #0ACDCD;
+  opacity: 1;
+}
+
+.icons {
+  opacity: 0;
+  float: right;
+  margin-right: 12px;
+  margin-top: 0px;
+}
