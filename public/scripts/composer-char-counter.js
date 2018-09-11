@@ -9,7 +9,6 @@ $(document).ready(function() {
     } else {
       $(this).siblings(".counter").removeClass("tooLong");
     }
-  console.log(count);
   });
 });
 
