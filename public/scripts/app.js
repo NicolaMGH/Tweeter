@@ -86,23 +86,29 @@ function renderTweet(a) {
 }
 
 function tweetSubmit() {
+  const $error = $("#errorMessage");
     $("#tweet-form").submit(function (event) {
+        $error.hide({
+          opacity: "toggle"
+        });
+        $(".new-tweet").css( {"padding-bottom": "35px"});
       event.preventDefault();
       if ($(".text-box").val().length > 140) {
-        alert("Tweet too long!!");
+        $error.text("Error: Tweet cannot exceed 140 characters");
+        $error.show({
+          opacity: "toggle"
+        });
+        $(".new-tweet").css( {"padding-bottom": "25px"});
       } else if (!$(".text-box").val().length){
-        alert("Please enter tweet!");
+        $error.text("Error: Please enter a tweet");
+        $error.show({
+          opacity: "toggle"
+        });
+        $(".new-tweet").css( {"padding-bottom": "25px"});
       } else {
-        $.ajax(
-          "/tweets",
-          {
-            data: $(this).serialize(),
-            method: "POST",
+        $.ajax("/tweets", { data: $(this).serialize(),method: "POST",
             success: data => {
-              // fill me in
                loadTweets();
-              // check for success status code
-              // else error in submitting data
             }
           });
       }
