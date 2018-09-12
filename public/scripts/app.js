@@ -116,15 +116,28 @@ function loadTweets() {
     });
 }
 
+//helper function to help protect against XSS
 function escape(str) {
   var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
+function toggleForm (){
+  const $button = $("#compose");
+  $button.on("click", function(){
+    $(".new-tweet").animate({
+      height: "toggle",
+      opacity: "toggle"
+    });
+    $(".text-box").focus();
+  });
+}
+
 $(document).ready(function() {
   tweetSubmit();
   loadTweets();
+  toggleForm();
 });
 
 
