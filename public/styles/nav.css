@@ -30,6 +30,7 @@
   color: teal;
   border-radius: 10px;
   border: 0;
+  border:1px solid black;
 }
 
 #nav-bar #compose:hover {
