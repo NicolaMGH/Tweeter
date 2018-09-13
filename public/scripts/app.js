@@ -30,6 +30,7 @@ function createTweetElement(db) {
 
 }
 
+//renders tweets to the home page
 function renderTweet(a) {
     a.forEach(function(tweet) {
         $("#tweets-container").prepend(createTweetElement(tweet));
@@ -62,13 +63,17 @@ function tweetSubmit() {
                 data: $(this).serialize(),
                 method: "POST",
                 success: data => {
+                    $(".text-box").val("");
+                    $(".counter").text("140");
                     loadTweets();
                 }
             });
+
         }
     });
 };
 
+//loads tweets
 function loadTweets() {
     $.ajax("/tweets", { method: "GET" })
         .then(function(tweets) {

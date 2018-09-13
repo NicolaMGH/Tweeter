@@ -20,24 +20,3 @@ module.exports = function makeDataHelpers(db) {
 
     };
 };
-
-//commented out code is for my notes
-
-//other way to get tweets with mongoDB
-//db.collection('tweets').find().sort({created_at: 1}).toArray(callback);
-
-//original gettweet without mongoDB
-// getTweets: function(callback) {
-//   simulateDelay(() => {
-//     const sortNewestFirst = (a, b) => a.created_at - b.created_at;
-//     callback(null, db.tweets.sort(sortNewestFirst));
-//   });
-// }
-
-//original savetweet without mongoDB
-//     saveTweet: function(newTweet, callback) {
-//   simulateDelay(() => {
-//     db.tweets.push(newTweet);
-//     callback(null, true);
-//   });
-// },
